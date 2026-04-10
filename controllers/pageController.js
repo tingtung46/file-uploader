@@ -2,15 +2,13 @@ import { prisma } from "../lib/prisma.js";
 import validateUser from "../config/validation.js";
 import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
+import passport from "passport";
 
 const welcomeGet = (req, res) => {
   res.render("index");
 };
 
-const signUpGet = async (req, res) => {
-  const users = await prisma.user.findMany();
-  console.log(JSON.stringify(users, null, 2));
-
+const signUpGet = (req, res) => {
   res.render("sign-up");
 };
 
@@ -47,4 +45,44 @@ const logInGet = (req, res) => {
   res.render("log-in");
 };
 
-export { welcomeGet, signUpGet, signUpPost, logInGet };
+const logInPost = (req, res, next) => {
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      return next(err);
+    } else if (!user) {
+      return res
+        .status(400)
+        .render("log-in", { err: "Check email and password again" });
+    }
+
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.redirect("/dashboard");
+    });
+  })(req, res, next);
+};
+
+const dashboardGet = (req, res) => {
+  res.render("dashboard");
+};
+
+const logOutGet = (req, res, next) => {
+  req.logOut((err) => {
+    if (err) return next(err);
+
+    res.render("log-out");
+  });
+};
+
+export {
+  welcomeGet,
+  signUpGet,
+  signUpPost,
+  logInGet,
+  logInPost,
+  dashboardGet,
+  logOutGet,
+};
