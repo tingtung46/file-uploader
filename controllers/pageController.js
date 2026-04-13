@@ -5,7 +5,9 @@ import bcrypt from "bcryptjs";
 import passport from "passport";
 
 const welcomeGet = (req, res) => {
-  res.render("index");
+  const user = req.user;
+
+  user ? res.redirect("/dashboard") : res.render("index");
 };
 
 const signUpGet = (req, res) => {

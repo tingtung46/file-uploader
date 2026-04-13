@@ -1,0 +1,25 @@
+<section>
+  <% if (user.folders) { %>
+  <div>
+    <% user.folders.forEach((folder) => { %>
+    <div>
+      <a href="<%= folder.name %>"><%= folder.name %></a>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+
+  <% if (user.files) { %>
+  <div>
+    <% user.files.forEach((file) => { %>
+    <div>
+      <a href="<%= file.name %>"><%= file.name %></a>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+
+  <% if (!user.folders.length && !user.files.length) { %>
+  <p>Your storage is empty</p>
+  <% } %>
+</section>
