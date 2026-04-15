@@ -42,9 +42,12 @@ model File {
 }
 
 model Folder {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
-  author   User   @relation("CreatedFolder", fields: [authorId], references: [id])
+  author   User     @relation("CreatedFolder", fields: [authorId], references: [id])
   authorId Int
-  files    File[] @relation("DestFolder")
+  folder   Folder?  @relation("FolderInFolder", fields: [folderId], references: [id])
+  folderId Int?
+  files    File[]   @relation("DestFolder")
+  folders  Folder[] @relation("FolderInFolder")
 }

@@ -1,0 +1,28 @@
+<section>
+  <button type="button" onclick="document.querySelector('#upload-file').showModal()">Add files</button>
+  <dialog id="upload-file">
+    <form action="/upload-file" method="post" enctype="multipart/form-data">
+      <input type="file" name="files" id="files" multiple>
+
+      <div class="btn-storage">
+        <button type="button" onclick="document.querySelector('#upload-file').close()">Cancel</button>
+        <button type="submit">Upload file</button>
+      </div>
+    </form>
+  </dialog>
+
+  <button type="button" onclick="document.querySelector('#create-folder').showModal()">Add folder</button>
+  <dialog id="create-folder">
+    <form action="/create-folder" method="post">
+      <div>
+        <label for="folder">New folder</label>
+        <input type="text" name="folder" id="folder">
+      </div>
+
+      <div class="btn-storage">
+        <button type="button" onclick="document.querySelector('#create-folder').close()">Cancel</button>
+        <button type="submit">Create folder</button>
+      </div>
+    </form>
+  </dialog>
+</section>
