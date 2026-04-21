@@ -40,7 +40,9 @@ passport.deserializeUser(async (id, done) => {
       include: {
         files: true,
         folders: {
-          include: true,
+          include: {
+            folders: true,
+          },
         },
       },
     });

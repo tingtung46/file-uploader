@@ -9,6 +9,10 @@ import {
   logOutGet,
 } from "../controllers/pageController.js";
 import isAuth from "../controllers/authController.js";
+import {
+  uploadFilePost,
+  createFolderPost,
+} from "../controllers/formController.js";
 
 const indexRouter = Router();
 
@@ -21,6 +25,10 @@ indexRouter.get("/log-in", logInGet);
 indexRouter.post("/log-in", logInPost);
 
 indexRouter.get("/dashboard", isAuth, dashboardGet);
+
+indexRouter.post("/upload-file", uploadFilePost);
+
+indexRouter.post("/create-folder", createFolderPost);
 
 indexRouter.get("/log-out", logOutGet);
 
