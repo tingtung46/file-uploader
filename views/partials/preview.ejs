@@ -3,6 +3,36 @@
   <div>
     <% user.folders.forEach((folder) => { %>
     <div>
+      <button type="button">
+        <i class="bi bi-three-dots-vertical"></i>
+      </button>
+
+      <div class="folder-options">
+        <ul class="marks">
+          <li>
+            <button type="button" onclick="document.querySelector('#edit-folder').showModal()">Rename</button>
+
+            <dialog id="edit-folder">
+              <div class="container-form">
+                <form action="/rename-folder" method="post">
+                  <div>
+                    <label for="rename-folder">Rename folder</label>
+                    <input type="text" name="rename-folder" id="rename-folder">
+                  </div>
+
+                  <div>
+                    <button type="button" onclick="document.querySelector('#edit-folder').close()">Cancel</button>
+                    <button type="submit">Rename</button>
+                  </div>
+                </form>
+              </div>
+            </dialog>
+          </li>
+
+          <li>Delete</li>
+        </ul>
+      </div>
+
       <a href="<%= folder/folder.id %>"><%= folder.name %></a>
     </div>
     <% }) %>
